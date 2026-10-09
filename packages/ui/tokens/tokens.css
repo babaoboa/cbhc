@@ -1,0 +1,140 @@
+@import "../fonts/fonts.css";
+
+:root {
+  --mask-green: #0d6b3b;
+  --mask-green-trace: #2b8a55;
+  --mask-green-lip: #08482a;
+  --mask-purple: #4b2d7f;
+  --mask-blue: #1f4fb0;
+  --mask-red: #ec3750;
+  --mask-white: #f3f4ee;
+
+  --enig: #e2b94e;
+  --on-mask: #f6f7f2;
+  --on-light-mask: #13221a;
+
+  --signal: #ec3750;
+}
+
+:root,
+[data-theme="paper"] {
+  color-scheme: light;
+
+  --paper: #e5ebe0;
+  --paper-raised: #eef2ea;
+  --paper-sunken: #d8e0d3;
+
+  --grid: #d3dccd;
+  --rule: #b4c0ae;
+  --rule-strong: #6e7e69;
+
+  --ink: #13221a;
+  --ink-muted: #4a5a4f;
+
+  --mask-black: #1a1e1c;
+  --copper: #b5672c;
+
+  --signal-text: #b91a36;
+  --led-open: #0d7a40;
+  --led-soon: #9a5b00;
+  --led-off: #4a5a4f;
+  --focus-ring: #13221a;
+}
+
+[data-theme="mask"] {
+  color-scheme: dark;
+
+  --paper: #0f1311;
+  --paper-raised: #161b18;
+  --paper-sunken: #0a0d0b;
+
+  --grid: #1a201c;
+  --rule: #2c3530;
+  --rule-strong: #66736a;
+
+  --ink: #ebefe6;
+  --ink-muted: #a3ae9f;
+
+  --mask-black: #2a302c;
+  --copper: #d98a4e;
+
+  --signal-text: #ff6f84;
+  --led-open: #3ddc84;
+  --led-soon: #f2b33d;
+  --led-off: #a3ae9f;
+  --focus-ring: #ebefe6;
+}
+
+:root,
+[data-theme] {
+  --focus-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--focus-ring);
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-24: 96px;
+
+  --radius-0: 0;
+  --radius-pad: 3px;
+  --radius-board: 8px;
+  --radius-hole: 999px;
+
+  --font-serif: "Redaction", "Newsreader", Georgia, serif;
+  --font-pixel: "Departure Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  --text-display: 400 88px / 84px var(--font-serif);
+  --text-display-tracking: -0.02em;
+  --text-title: 400 48px / 52px var(--font-serif);
+  --text-title-tracking: -0.015em;
+  --text-heading: 400 28px / 34px var(--font-serif);
+  --text-subhead: 400 21px / 28px var(--font-serif);
+  --text-lede: italic 400 21px / 31px var(--font-serif);
+  --text-body: 400 18px / 29px var(--font-serif);
+  --text-small: 400 15px / 23px var(--font-serif);
+  --text-small-italic: italic 400 15px / 23px var(--font-serif);
+  --text-readout: 400 33px / 36px var(--font-pixel);
+  --text-key: 400 22px / 24px var(--font-pixel);
+  --text-label: 400 11px / 16px var(--font-pixel);
+}
+
+.text-display {
+  font: var(--text-display);
+  letter-spacing: var(--text-display-tracking);
+}
+.text-title {
+  font: var(--text-title);
+  letter-spacing: var(--text-title-tracking);
+}
+.text-heading {
+  font: var(--text-heading);
+}
+.text-subhead {
+  font: var(--text-subhead);
+}
+.text-lede {
+  font: var(--text-lede);
+}
+.text-body {
+  font: var(--text-body);
+}
+.text-small {
+  font: var(--text-small);
+}
+.text-small-italic {
+  font: var(--text-small-italic);
+}
+.text-readout {
+  font: var(--text-readout);
+}
+.text-key {
+  font: var(--text-key);
+}
+.text-label {
+  font: var(--text-label);
+}
