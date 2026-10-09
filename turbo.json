@@ -9,6 +9,11 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
+    "test": {
+      "dependsOn": ["^build"],
+      "passThroughEnv": ["PLAYWRIGHT_*", "CI"],
+      "outputs": []
+    },
     "dev": {
       "cache": false,
       "persistent": true

@@ -1,0 +1,222 @@
+.key {
+  --key-face: var(--mask-green);
+  --key-edge: var(--mask-green-lip);
+  --key-lip: var(--mask-green-lip);
+  --key-lip-depth: 3px;
+  --key-raise: 2px;
+  --key-shift: 0px;
+  --key-lighten: 0.04;
+  --key-darken: 0.05;
+  --key-tone: 0;
+  --key-ink: var(--on-mask);
+  --key-inset: var(--space-4);
+  --key-pad-size: 6px;
+  --key-lift: 1px;
+
+  position: relative;
+  display: inline-flex;
+  height: var(--key-height-md);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--key-ink);
+  font: var(--text-key);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key::before {
+  content: "";
+  position: absolute;
+  inset: var(--key-lip-depth) 0 calc(-1 * var(--key-lip-depth));
+  border-radius: var(--radius-pad);
+  background: var(--key-lip);
+}
+
+.key__face {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex: auto;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0 var(--key-inset) calc(var(--key-lift) * 2);
+  border: 1px solid var(--key-edge);
+  border-radius: var(--radius-pad);
+  background: var(--key-face);
+  transform: translateY(var(--key-shift));
+  transition-property: transform, background-color;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.key[data-variant="quiet"] {
+  --key-face: var(--paper-raised);
+  --key-edge: var(--rule-strong);
+  --key-lip: var(--rule);
+  --key-ink: var(--ink);
+}
+
+.key[data-variant="on-mask"] {
+  --key-face: var(--mask-black);
+  --key-edge: var(--mask-black-lip);
+  --key-lip: var(--mask-black-lip);
+}
+
+.key[data-size="sm"] {
+  --key-inset: var(--space-3);
+  --key-pad-size: 4px;
+
+  height: var(--key-height-sm);
+  font: var(--text-small);
+}
+
+/* States */
+
+@media (hover: hover) {
+  .key:hover:not(:disabled, [aria-busy="true"]) {
+    --key-shift: calc(-1 * var(--key-raise));
+    --key-tone: var(--key-lighten);
+  }
+}
+
+.key:active:not(:disabled, [aria-busy="true"]) {
+  --key-shift: var(--key-lip-depth);
+  --key-tone: calc(-1 * var(--key-darken));
+}
+
+@supports (color: oklch(from red l c h)) {
+  .key__face {
+    background: oklch(from var(--key-face) calc(l + var(--key-tone)) c h);
+  }
+}
+
+.key:focus-visible {
+  outline: none;
+}
+
+.key:focus-visible .key__face {
+  box-shadow: var(--focus-shadow);
+}
+
+.key:disabled {
+  --key-face: var(--paper-sunken);
+  --key-edge: var(--rule);
+  --key-ink: var(--ink-muted);
+
+  cursor: not-allowed;
+}
+
+.key:disabled::before {
+  display: none;
+}
+
+.key:disabled:not([data-variant="quiet"]) .key__face {
+  padding-inline: calc(
+    var(--key-inset) + (var(--key-pad-size) + var(--space-2)) / 2
+  );
+}
+
+.key:disabled .key__pad {
+  display: none;
+}
+
+.key[aria-busy="true"] {
+  cursor: progress;
+}
+
+.key[aria-busy="true"] .key__face > :not(.key__progress) {
+  opacity: 0;
+}
+
+/* Parts */
+
+.key__pad {
+  flex: none;
+  width: var(--key-pad-size);
+  height: var(--key-pad-size);
+  background: var(--enig);
+}
+
+.key__label {
+  text-box: trim-both cap alphabetic;
+}
+
+.key[data-size="md"] .key__label {
+  margin-inline: calc(-1em / 11);
+}
+
+@supports not (text-box: trim-both cap alphabetic) {
+  .key[data-size="sm"] .key__label {
+    position: relative;
+    top: 0.05em;
+  }
+}
+
+.key__progress {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding-block: inherit;
+}
+
+.key__progress > span {
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  animation: key-progress 900ms step-end infinite;
+}
+
+.key__progress > span:nth-child(2) {
+  opacity: 0.5;
+  animation-delay: -600ms;
+}
+
+.key__progress > span:nth-child(3) {
+  opacity: 0.25;
+  animation-delay: -300ms;
+}
+
+@keyframes key-progress {
+  0% {
+    opacity: 1;
+  }
+  33.333% {
+    opacity: 0.25;
+  }
+  66.667% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key__face {
+    transition: none;
+  }
+
+  .key__progress > span {
+    animation: none;
+  }
+}
+
+.key__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

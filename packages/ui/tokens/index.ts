@@ -17,6 +17,8 @@ const colorNames = [
   "mask-green-trace",
   "mask-green-lip",
   "mask-black",
+  "mask-black-trace",
+  "mask-black-lip",
   "mask-purple",
   "mask-blue",
   "mask-red",
@@ -60,6 +62,11 @@ export const radius = {
   hole: 999,
 } as const;
 export type RadiusToken = keyof typeof radius;
+
+export const keyHeight = {
+  md: 48,
+  sm: 40,
+} as const;
 
 export const font = {
   serif: "var(--font-serif)",

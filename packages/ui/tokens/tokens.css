@@ -4,6 +4,7 @@
   --mask-green: #0d6b3b;
   --mask-green-trace: #2b8a55;
   --mask-green-lip: #08482a;
+  --mask-black-lip: #050706;
   --mask-purple: #4b2d7f;
   --mask-blue: #1f4fb0;
   --mask-red: #ec3750;
@@ -32,6 +33,7 @@
   --ink-muted: #4a5a4f;
 
   --mask-black: #1a1e1c;
+  --mask-black-trace: #2e3531;
   --copper: #b5672c;
 
   --signal-text: #b91a36;
@@ -56,6 +58,7 @@
   --ink-muted: #a3ae9f;
 
   --mask-black: #2a302c;
+  --mask-black-trace: #3b443e;
   --copper: #d98a4e;
 
   --signal-text: #ff6f84;
@@ -84,6 +87,9 @@
   --radius-pad: 3px;
   --radius-board: 8px;
   --radius-hole: 999px;
+
+  --key-height-md: 48px;
+  --key-height-sm: 40px;
 
   --font-serif: "Redaction", "Newsreader", Georgia, serif;
   --font-pixel: "Departure Mono", "JetBrains Mono", ui-monospace, monospace;
