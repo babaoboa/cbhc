@@ -71,6 +71,7 @@
 :root,
 [data-theme] {
   --focus-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--focus-ring);
+  --field-border-error: var(--signal-text);
 }
 
 :root {
@@ -90,6 +91,8 @@
 
   --key-height-md: 48px;
   --key-height-sm: 40px;
+
+  --field-height: 48px;
 
   --font-serif: "Redaction", "Newsreader", Georgia, serif;
   --font-pixel: "Departure Mono", "JetBrains Mono", ui-monospace, monospace;

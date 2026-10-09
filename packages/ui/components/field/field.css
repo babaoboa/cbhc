@@ -1,0 +1,108 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+
+.field__label {
+  align-self: flex-start;
+  color: var(--ink);
+  font: var(--text-small);
+}
+
+
+.field__point {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-inline-end: var(--space-2);
+  vertical-align: middle;
+  background: var(--copper);
+  mask: url("./test-point.svg") center / 9px 9px no-repeat;
+}
+
+.field__input {
+  --field-border: var(--rule-strong);
+  --field-ring: var(--focus-ring);
+
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: var(--field-height);
+  margin: 0;
+  padding: calc(var(--space-2) + 1px) var(--space-3) var(--space-2);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius-pad);
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: var(--text-body);
+  appearance: none;
+}
+
+.field__input::placeholder {
+  color: var(--ink-muted);
+  opacity: 1;
+}
+
+.field__input[aria-invalid="true"] {
+  --field-border: var(--field-border-error);
+  --field-ring: var(--field-border-error);
+}
+
+@media (hover: hover) {
+  .field__input:hover:not(:disabled, [readonly]),
+  .field__label:hover + .field__input:not(:disabled, [readonly]) {
+    --field-border: var(--ink);
+  }
+
+  .field__input[aria-invalid="true"]:hover:not(:disabled, [readonly]),
+  .field__label:hover
+    + .field__input[aria-invalid="true"]:not(:disabled, [readonly]) {
+    --field-border: var(--field-border-error);
+
+    box-shadow: inset 0 0 0 1px var(--field-border);
+  }
+}
+
+.field__input:focus-visible {
+  outline: 2px solid var(--field-ring);
+  outline-offset: 3px;
+}
+
+.field__input:disabled {
+  --field-border: var(--rule);
+
+  background: var(--paper-sunken);
+  color: var(--ink-muted);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.field__input[readonly] {
+  background: var(--paper-sunken);
+  cursor: default;
+}
+
+.field__input[readonly]:focus {
+  outline: none;
+}
+
+
+.field__note {
+  margin: 0;
+  color: var(--ink-muted);
+  font: var(--text-small);
+}
+
+.field__error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+  color: var(--signal-text);
+}
+
+.field__error > :first-child {
+  flex: none;
+}

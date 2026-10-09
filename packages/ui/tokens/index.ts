@@ -33,6 +33,7 @@ const colorNames = [
   "led-soon",
   "led-off",
   "focus-ring",
+  "field-border-error",
 ] as const;
 export type ColorToken = (typeof colorNames)[number];
 
@@ -40,7 +41,6 @@ export const color = Object.fromEntries(
   colorNames.map((name) => [name, `var(--${name})`]),
 ) as { readonly [K in ColorToken]: `var(--${K})` };
 
-// Pixel values, for layout maths such as snapping to the 24px pitch.
 export const space = {
   1: 4,
   2: 8,
@@ -67,6 +67,8 @@ export const keyHeight = {
   md: 48,
   sm: 40,
 } as const;
+
+export const fieldHeight = 48;
 
 export const font = {
   serif: "var(--font-serif)",

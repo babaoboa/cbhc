@@ -94,6 +94,45 @@ export async function measureKeyInk(key: Locator): Promise<KeyInk> {
     pad: found.pad && toCss(found.pad),
   };
 }
+export async function measureInk(
+  target: Locator,
+  ink: Rgb,
+  background: Rgb,
+  inset = 0,
+): Promise<Box> {
+  const box = (await target.boundingBox())!;
+  const scale = await target.evaluate(() => devicePixelRatio);
+  const png = PNG.sync.read(
+    await target.screenshot({ animations: "disabled", scale: "device" }),
+  );
+  const originX = Math.floor(box.x * scale) / scale - box.x;
+  const originY = Math.floor(box.y * scale) / scale - box.y;
+  const from = Math.ceil(inset * scale);
+  let found: Box | undefined;
+
+  for (let y = from; y < png.height - from; y++) {
+    for (let x = from; x < png.width - from; x++) {
+      const i = (y * png.width + x) * 4;
+      const px: Rgb = [png.data[i], png.data[i + 1], png.data[i + 2]];
+      const t = Math.min(1, coverage(px, background, ink));
+      const blend = background.map((c, n) => c + (ink[n] - c) * t) as Rgb;
+      if (t < 0.5 || distance(px, blend) > 24) continue;
+      found ??= { left: x, right: x, top: y, bottom: y };
+      found.left = Math.min(found.left, x);
+      found.right = Math.max(found.right, x);
+      found.top = Math.min(found.top, y);
+      found.bottom = Math.max(found.bottom, y);
+    }
+  }
+
+  if (!found) throw new Error(`No rgb(${ink}) ink found in screenshot`);
+  return {
+    left: originX + found.left / scale,
+    right: originX + (found.right + 1) / scale,
+    top: originY + found.top / scale,
+    bottom: originY + (found.bottom + 1) / scale,
+  };
+}
 
 export async function paintedBottom(key: Locator): Promise<number> {
   const box = (await key.boundingBox())!;

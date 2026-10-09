@@ -15,3 +15,7 @@ bin
 test-results
 playwright-report
 blob-report
+
+# storybook
+storybook-static
+*storybook.log
